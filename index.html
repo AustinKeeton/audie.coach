@@ -58,9 +58,10 @@ h1 em{font-weight:400}
 svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* terminal */
-#term{display:none;margin:0 0 1.5rem;border:1.5px solid var(--ink);border-radius:8px;padding:.75rem;font-size:.88rem;background:var(--soft)}
-#term.on{display:block}
-#out{white-space:pre-wrap;margin:0 0 .25rem}
+#term{margin:0 0 1.25rem;border:1.5px solid var(--ink);border-radius:8px;padding:.6rem .75rem;font-size:.88rem;background:var(--soft);cursor:text}
+#out:empty{display:none}
+#ti::placeholder{color:var(--dim);opacity:1}
+#out{white-space:pre-wrap;margin:0 0 .4rem}
 #out a{font-weight:700}
 #tf{display:flex;gap:.5rem}
 #tf label{color:var(--dim)}
@@ -114,7 +115,7 @@ footer{margin:3.5rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);co
   <p class="lede">I coach people rebuilding who they are after a big change: a diagnosis, a career exit, or leaving the beliefs they grew up with.</p>
   <div id="term" role="region" aria-label="Terminal">
     <div id="out" aria-live="polite"></div>
-    <form id="tf" autocomplete="off"><label for="ti">$</label><input id="ti" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go"></form>
+    <form id="tf" autocomplete="off"><label for="ti">$</label><input id="ti" placeholder="type help, book, email, or text" aria-label="Terminal command" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go"></form>
   </div>
   <div class="btns">
     <a class="btn primary" href="https://cal.com/audie.coach/intro"><svg class="i"><use href="#cal"/></svg>Book a free intro call</a>
@@ -181,7 +182,7 @@ const BOOK='https://cal.com/audie.coach/intro', N='OTk2MTg5ODYwODEr'; // phone: 
 let pending=null;
 const say=(h)=>{const d=document.createElement('div');d.innerHTML=h;out.appendChild(d);term.scrollIntoView({block:'nearest'})};
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const open=()=>{if(!term.classList.contains('on')){term.classList.add('on');say('hi. type <b>help</b> to see what I do.')}inp.focus({preventScroll:true})};
+const open=()=>{inp.focus({preventScroll:true})};
 const C={
   help:()=>say('help · whoami · book · email · text · ls · clear · exit'),
   whoami:()=>say('audie. coach, scrum master, recovering engineer.'),
@@ -190,7 +191,7 @@ const C={
   email:()=>{say('<a href="mailto:hello@audie.coach">hello@audie.coach</a>');location.href='mailto:hello@audie.coach'},
   text:()=>{pending='hi';say('quick human check: type <b>hi</b>')},
   clear:()=>{out.innerHTML=''},
-  exit:()=>{term.classList.remove('on')}
+  exit:()=>{out.innerHTML='';inp.blur()}
 };
 function run(raw){
   const v=raw.trim().toLowerCase(); if(!v)return;
@@ -200,7 +201,8 @@ function run(raw){
     else say('hmm, not quite. run <b>text</b> to try again.');return}
   (C[v]||(()=>say('command not found: '+esc(v)+'. try <b>help</b>.')))();
 }
-document.getElementById('cur').addEventListener('click',open);
+document.getElementById('cur').addEventListener('click',()=>{term.scrollIntoView({block:'center',behavior:'smooth'});open()});
+term.addEventListener('click',e=>{if(e.target.tagName!=='A')open()});
 document.getElementById('tf').addEventListener('submit',e=>{e.preventDefault();run(inp.value);inp.value=''});
 document.querySelectorAll('[data-cmd]').forEach(b=>b.addEventListener('click',()=>{open();run(b.dataset.cmd)}));
 })();
