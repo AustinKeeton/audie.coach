@@ -10,6 +10,9 @@
 <meta property="og:url" content="https://audie.coach">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="logo/apple-touch-icon.png">
+<meta property="og:image" content="https://audie.coach/logo/audie-mark-1024.png">
 <link rel="preload" href="fonts/victor-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face{font-family:"Victor Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/victor-mono-latin-400-normal.woff2) format("woff2")}
@@ -35,6 +38,7 @@ i,em{font-style:italic}
 
 /* hero */
 header{padding-top:2.75rem}
+.mark{display:block;width:48px;height:48px;margin:0 0 .9rem -6px}
 .name{font-size:.9rem;color:var(--dim);margin:0 0 1.75rem}
 .name b{color:var(--ink);font-size:1rem}
 h1{font-size:clamp(1.9rem,7vw,2.5rem);line-height:1.15;margin:0 0 1rem;font-weight:700;letter-spacing:-.01em}
@@ -105,6 +109,7 @@ footer{margin:3.5rem 0 1rem;padding-top:1rem;border-top:1px solid var(--line);co
 <main>
 <header>
   <!-- photo slot: <img class="photo" src="audie.webp" alt="Audie Keeton" width="96" height="96"> -->
+  <img class="mark" src="logo/favicon.svg" alt="" width="48" height="48">
   <p class="name"><b>Audie Keeton</b><br>ICF-trained Coach · Scrum Master · Former Software Engineer</p>
   <h1>Helping people figure out who they are <em>now</em>.<button class="cursor" id="cur" aria-label="Open the terminal" title="psst. tap me."></button></h1>
   <p class="lede">I coach people rebuilding who they are after a big change: a diagnosis, a career exit, or leaving the beliefs they grew up with.</p>
