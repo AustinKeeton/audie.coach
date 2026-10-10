@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Keeton;Audie;;;
+FN:Audie Keeton
+TITLE:Coach & Scrum Master
+EMAIL;TYPE=INTERNET,PREF:hello@audie.coach
+URL:https://audie.coach
+ADR;TYPE=WORK:;;;Jacksonville;FL;;USA
+NOTE:Helping people figure out who they are now.
+END:VCARD
